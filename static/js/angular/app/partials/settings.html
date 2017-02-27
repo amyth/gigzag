@@ -1,0 +1,93 @@
+<!-- navigation -->
+<div class="navbar-spacer"></div>
+<ng-include src="'/static/js/angular/app/partials/navigation.html'"></ng-include>
+
+<!-- main content -->
+<div class="container maincontainer">
+    <div class="settings">
+    <div class="section light">
+        <div class="heading">
+            <div class="u-pull-left">
+                <h4>Filter</h4>
+            </div>
+            <div class="u-pull-right" ng-click="toggleFilterSwitch()">
+                <switch ng-model="settings.filter_switch" class="green"></switch>
+            </div>
+            <div class="u-cf">
+            </div>
+        </div>
+        <div class="suggested tb">
+            <h6>Suggested</h6>
+            <div class="suggestions tags">
+                <span id="stag_{@ stag.id @}" class="tag" ng-repeat="stag in suggested_tags" ng-click="addTag(stag)">
+                    <span>{@ stag.title @}</span>
+                    <span class="mini-add">+</span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="section dark">
+        <div class="filter-tag-list">
+            <div class="tags selected">
+                <div class="wrap" ng-if="settings.filters.length > 0">
+                    <span id="tag_{@ tag.id @}" class="tag" ng-repeat="tag in settings.filters" ng-click="removeTag(tag)">
+                        <span>{@ tag.title @}</span>
+                        <span class="mini-remove">x</span>
+                    </span>
+                </div>
+                <div class="wrap" ng-if="settings.filters.length <= 0">
+                    <p>Please select a tag from the suggestions</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="heading">
+            <div>
+                <h4>Posted By</h4>
+            </div>
+            <div class="tags">
+                <span class="tag" ng-repeat="(lname, lvalue) in plevels">
+                    <span ng-click="updatePostedBy(lvalue)">
+                        <span>{@ lname @}</span>
+                        <span ng-if="settings.posted_by === lvalue" class="mini-remove">x</span>
+                        <span ng-if="settings.posted_by !== lvalue" class="mini-add">+</span>
+                    </span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="heading">
+            <div class="u-pull-left">
+                <h4>Location</h4>
+            </div>
+            <div class="u-pull-right" ng-click="toggleNearbySwitch()">
+                <switch ng-model="settings.nearby_switch" class="green"></switch>
+            </div>
+            <div class="u-cf"></div>
+        </div>
+        <div class="row">
+            <select ng-options="item.value as item.text for item in cities" ng-model="settings.city"></select>
+        </div>
+    </div>
+    <div class="section last">
+        <div class="heading">
+            <div class="">
+                <h4>Account</h4>
+            </div>
+        </div>
+        <div class="logout-link uppercase">
+            <a href="/logout/">Logout</a>
+        </div>
+    </div>
+
+	<div class="gig-controls">
+	  <div class="padding-left-15 padding-right-15">
+		  <a class="cb primary full-width arrow" href="#/gigs">Done</a>
+	  </div>
+	  <div class="u-cf"></div>
+	</div>
+    </div>
+</div>
+<div class="loader" data-loading></div>

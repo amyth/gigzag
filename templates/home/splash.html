@@ -1,0 +1,44 @@
+{% extends 'layouts/base_static.html' %}
+{% load static from staticfiles %}
+
+{% block html_class %}hunnit{% endblock html_class %}
+{% block body_class %}hunnit{% endblock body_class %}
+{% block cont_class %}hunnit{% endblock cont_class %}
+
+{% block navigation %}
+{% endblock navigation %}
+
+{% block content %}
+<div class="login-container splash-container">
+    <div class="logo">
+        <a href="{% url 'home:index' %}"><img src="{% static 'images/logo.png' %}" /></a>
+        <div class="maincontainer">
+            <p class="tagline">For great performances and parties.</p>
+        </div>
+    </div>
+    <div class="login-info download-info">
+        <div class="container">
+            <p>Download the gigzag app here.</p>
+            <a href="https://play.google.com/store/apps/details?id=com.gigs.gigzag&hl=en"><img src="{% static 'images/google.png' %}" class="download" /></a>
+            <p>Or visit <a href="http://gigzag.in">GigZag.in</a> on your mobile.</p>
+        </div>
+    </div>
+    <div class="login-info ics">
+        <div class="row">
+            <div class="six columns">
+                <div class="ic"><img src="/static/images/icons/swipe.png" /></div>
+                <p>To Sample Gigs</p>
+            </div>
+            <div class="six columns">
+                <div class="ic"><img src="/static/images/icons/yellow_plus.png" /></div>
+                <p>Create your own Gigs</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    setTimeout(function(){
+        window.location.href = '/';
+    }, 5000)
+</script>
+{% endblock content %}

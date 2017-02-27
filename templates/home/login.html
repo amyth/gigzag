@@ -1,0 +1,41 @@
+{% extends 'layouts/base_static.html' %}
+{% load static from staticfiles %}
+
+{% block html_class %}hunnit{% endblock html_class %}
+{% block body_class %}hunnit{% endblock body_class %}
+{% block cont_class %}hunnit{% endblock cont_class %}
+
+{% block navigation %}
+{% endblock navigation %}
+
+{% block content %}
+<div class="login-container">
+    <div class="logo">
+        <a href="{% url 'home:index' %}"><img src="{% static 'images/logo.png' %}" /></a>
+        <div class="maincontainer">
+            <p class="tagline">For great performances and parties.</p>
+        </div>
+    </div>
+    <div class="login-buttons">
+        <a href="/accounts/facebook/login/" class="login-button facebook">Login with facebook</a>
+    </div>
+    <div class="login-info">
+        <div class="container">
+            <p>Facebook login helps see what your friends are playing or planning</p>
+            <p>It also helps artists/hosts discover audience</p>
+        </div>
+    </div>
+    <div class="login-info ics">
+        <div class="row">
+            <div class="six columns">
+                <div class="ic"><img src="/static/images/icons/swipe.png" /></div>
+                <p>To Sample Gigs</p>
+            </div>
+            <div class="six columns">
+                <div class="ic"><img src="/static/images/icons/yellow_plus.png" /></div>
+                <p>Create your own Gigs</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

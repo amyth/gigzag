@@ -1,0 +1,47 @@
+<!-- navigation -->
+<div class="navbar-spacer"></div>
+<ng-include src="'/static/js/angular/app/partials/navigation.html'"></ng-include>
+
+
+<!-- main content -->
+<div class="maincontainer profilescreen">
+<div class="ngd message" ng-if="gigs.length <= 0">
+    <div class="container">
+        <p>Please start by adding a gig below.</p>
+    </div>
+</div>
+
+<div class="gigs-list" ng-if="gigs.length > 0">
+    <div class="container padding-left-15 padding-right-15">
+        <div class="gig-list-item row" id="gig_{@ gig.id @}" ng-repeat="gig in gigs">
+            <div class="four columns cover">
+                <img src="{@ gig.cover @}" alt="{@gig.title@}" />
+            </div>
+            <div class="eight columns meta">
+                <h2 class="title">{@ gig.title @}</h2>
+                <div class="date small grey uppercase">{@ gig.date @}</div>
+                <div class="address small grey"><span class="icon icon-location"></span>
+                    {@ gig.gig_address | limitTo: 30 @}
+                    <span ng-if="gig.gig_address.length > 30">..</span>
+                </div>
+                <span class="red" ng-if="!gig.moderated">(Pending Moderation)</span>
+                <span class="edit-control"><a href="/#/create/{@ gig.id @}"><span class="icon icon-edit"></span></a></span>
+                <span class="active-control" ng-click="changeGigStatus(gig);" ng-if="gig.moderated">
+                    <form>
+                        <switch id="{@gig.id@}_active_switch" name="{@gig.id@}_active_switch" ng-model="gig.is_active" class="green"></switch>
+                    </form>
+                </span>
+                <a class="cb secondary arrow small" ng-click="toggleSharer(gig)">Promote Gig</a>
+            </div>
+            <ng-include src="'/static/js/angular/app/partials/sharer.html'" class="mesharer"></ng-include>
+        </div>
+    </div>
+</div>
+
+<div class="gig-controls">
+  <div class="padding-left-15 padding-right-15">
+      <a class="cb primary full-width arrow" href="#/create">Create a Gig</a>
+  </div>
+  <div class="u-cf"></div>
+</div>
+</div>

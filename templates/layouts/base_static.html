@@ -1,0 +1,107 @@
+{% load static from staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en" class="{% block html_class %}{% endblock html_class %}">
+
+    <head>
+        <!-- meta -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="google-site-verification" content="xUwla6xvtzlnSVP7kBGuUJtBbVV8l_5zoBvAlJR2odw" />
+
+        <!-- css -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/skeleton.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+        {% if not request.is_mobile or not request.is_phone %}
+            <link rel="stylesheet" type="text/css" href="{% static 'css/desktop.css' %}" />
+        {% endif %}
+        <!--
+        <link rel="stylesheet" type="text/css" href="{% static 'css/video.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/slider-pro.css' %}" />
+        -->
+
+        <!-- javascript
+        <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/jquery.easings.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/underscore.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/jquery.sliderPro.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/video.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/video.prefixfree.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/angular/angular.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/angular/angular.route.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/angular/angular.resource.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/angular/app/app.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/angular/app/services.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/angular/app/controllers.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/angular/app/directives.js' %}"></script>
+        -->
+    </head>
+
+    <body class="has-docked-nav {% block body_class %}{% endblock body_class %} {% if not request.is_mobile or not request.is_phone %}desktop_body{% endif %}">
+        {% if not request.is_mobile or not request.is_phone %}
+        <div class="desktop_nav">
+            <div class="container">
+                <div class="row">
+                    <div class="four columns social">
+                        <ul class="navbar-list">
+                            <li class="navbar-item">
+                                <a href="https://www.facebook.com/gigzagme/" class="navbar-link"><img src="{% static 'images/desk_face.png' %}" /></a>
+                            </li>
+                            <li class="navbar-item">
+                                <a href="https://twitter.com/GigZagMe" class="navbar-link"><img src="{% static 'images/desk_twitter.png' %}" /></a>
+                            </li>
+                            <li class="navbar-item">
+                                <a href="https://plus.google.com/108100675008412216709?hl=en" class="navbar-link"><img src="{% static 'images/desk_gplus.png' %}" /></a>
+                            </li>
+                            <li class="navbar-item">
+                                <a href="https://www.instagram.com/gigzagme/" class="navbar-link"><img src="{% static 'images/desk_insta.png' %}" /></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="four columns logo">
+                        <ul class="navbar-list">
+                            <li class="navbar-item">
+                                <a href="/" class="navbar-link"><img src="{% static 'images/logo_w.png' %}" /></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="four columns links">
+                        <ul class="navbar-list">
+                            <li class="navbar-item">
+                                <a href="https://gigzag.wordpress.com/blog/" class="navbar-link">Blog</a>
+                            </li>
+                            <li class="navbar-item">
+                                <a href="https://gigzag.wordpress.com/contact/" class="navbar-link">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right_info">
+            <p>We built GigZag for artists, acts<br/>and parties to find the right crowd.</p>
+            <p>Discover great gigs and start host-<br/>ing your own!</p>
+            <p><strong>Team GigZag</strong></p>
+            <p class="smaller"><i>Go to gigzag.in on your mobile<br/>for a fuller experience.</i></p>
+        </div>
+        <div class="desktop_container">
+        {% endif %}
+        <div class="container {% block cont_class %}{% endblock cont_class %}">
+
+                {% block navigation %}
+                <div class="primary-bg">
+                    <!-- navigation -->
+                    {% include 'partials/navigation.html' %}
+                </div>
+                {% endblock navigation %}
+
+                {% block content %}
+                {% endblock content %}
+        </div>
+		{% if not request.is_mobile or not request.is_phone %}
+        </div>
+        {% endif %}
+    </body>
+
+</html>

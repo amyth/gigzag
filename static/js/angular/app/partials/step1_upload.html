@@ -1,0 +1,50 @@
+<div class="uploadscreen">
+<div class="maincontainer">
+    <div class="upload-preview" ng-if="step1_data.youtube_link.length < 1">
+        <video class="preview" id="preview"></video>
+    </div>
+    <div class="upload-preview" ng-if="step1_data.youtube_link.length > 1">
+        <iframe height="230px" width="100%" src="{@ trustSrc(step1_data.youtube_link) @}" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div class="upload-message">
+        <h5 class="uppercase">Upload a video message</h5>
+        <span class="tut small">(Hold the phone like this while recording) <img class="mobrot" src="/static/images/icons/icon-mob_rotate.jpg" /></span>
+        <div class="cell camera" ng-click="captureVideo(event)">
+            <div>
+                <span class="icon icon-camera"></span>
+                <span class="ictext option uppercase">Camera</span>
+            </div>
+        </div>
+        <span class="div or uppercase">or</span>
+    </div>
+    <div class="upload-options filters" ng-if="!showYoutube">
+        <div class="table">
+            <div class="cell" ng-click="chooseVideo(event)">
+                <div><span class="icon icon-gallery"></span></div>
+                <span class="option uppercase">From Phone</span>
+            </div>
+            <a href="https://youtube.com" target="_blank" class="cell" ng-click="showYoutubeInfo(event)">
+                <div><span class="icon icon-youtube"></span></div>
+                <span class="option uppercase">Youtube</span>
+            </a>
+        </div>
+    </div>
+    <div class="youtube_wrap" ng-if="showYoutube">
+        <div class="youtube_label">Please paste the link to your youtube video</div>
+        <input type="text" id="youtube_link" name="youtube_link" ng-model="step1_data.youtube_link" />
+        <button class="cb secondary arrow" ng-click="addYoutubeVideo();">Copy video</button>
+    </div>
+
+    <div class="coverimage_wrap">
+        <a class="cover_upload uppercase" ng-click="chooseCover($event)">Upload A Cover Image <img class="covup" src="/static/images/icons/icon-upload.jpg" /></a>
+        <span class="tut">(optional)</span>
+    </div>
+
+    <div class="gig-controls">
+      <div class="padding-left-15 padding-right-15">
+          <a class="cb primary full-width arrow" ng-click="stepTwo()">Next</a>
+      </div>
+      <div class="u-cf"></div>
+  </div>
+</div>
+</div>

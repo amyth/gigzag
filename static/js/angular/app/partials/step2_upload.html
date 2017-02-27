@@ -1,0 +1,89 @@
+<div class="uploadscreen static">
+<div class="maincontainer">
+<div class="uploader">
+    <div class="form-container step2">
+        <div class="container padding-left-15 padding-right-15 primary-bg">
+            <div class="uppercase">
+                <h5 class="bodd htitle small mbott15" editable-text="gig.title" buttons="no" blur="submit">{@ gig.title || "Add Event Title Here" @}</h5>
+                <div class="title-holder">
+                    <div class="row">
+                        <div class="twelve columns mbott15">
+                            <h2 class="bodd htitle medium" editable-text="gig.artist" buttons="no" blur="submit">{@ gig.artist || "Add Artist / Band / Host Name" @}</h2>
+                        </div>
+                    </div>
+                    <div class="date-time-holder mbott15">
+                        <div class="u-pull-left">
+                        <span class="date bodd" ng-click="selectDate($event)">{@ gig.date || "DD-MM-YYYY" @}</span>
+                        <datepicker date-format="dd/MM/yyyy" datepicker-toggle="false" datepicker-show="{@ showdpc @}" date-refocus="true"><input ng-model="gig.date" type="text" class="x720dp" /></datepicker>
+                        </div>
+                        <div class="u-pull-right bodd">
+                        <ng-timepicker class="atp" ng-model="gig.time"></ng-timepicker>
+                        <span class="uppercase">hrs</span>
+                        </div>
+                        <div class="u-cf"></div>
+                    </div>
+                </div>
+
+                <div class="address-holder mbott15 bodd">
+                    <span class="icon icon-location"></span>
+                    <span class="location" editable-text="step2_data.location_name" buttons="no" blur="submit">{@ step2_data.location_name || "Address: House No." @}</span>
+                </div>
+                <div class="address-holder mbott15 bodd">
+                    <span class="city" editable-select="step2_data.location_city" buttons="no"
+                        e-ng-options="x.value as x.text for x in cities">{@ showCity() @}</span>
+                </div>
+                <div class="row">
+                    <div class="twelve columns mbott15">
+                        <span class="uppercase pvalue gigtype bodd" ng-click="toggleTags()">{@ getFirstTag() @}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" ng-show="showTags">
+                    <div class="twelve columns">
+                    <tags-input ng-model="gig.tags" key-property="title" display-property="title" placeholder="Type & press enter to add genre">
+                        <auto-complete source="loadTags($query)" display-property="title"></auto-complete>
+                    </tags-input>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="locationpicker">
+            <!--<locationpicker options="locationOptions"></locationpicker>-->
+            <div class="u-cf"></div>
+        </div>
+        <div class="container padding-left-15 padding-right-15 secondary-bg ptop15">
+            <div class="guest-numbers csix mbott15">
+                <div class="u-pull-left">
+                    <span class="">Maximum No. of Guests allowed</span>
+                </div>
+                <div class="u-pull-right">
+                    <span class="nguests" editable-number="gig.no_of_guests" buttons="no" blur="submit">{@ gig.no_of_guests || "00" @}</span>
+                </div>
+                <div class="u-cf"></div>
+            </div>
+            <div class="description bodd csix mbott15">
+                <span class="description" editable-textarea="gig.description" buttons="no" blur="submit">{@ gig.description || "Description..." @}</h5>
+            </div>
+            <div class="contact csix mbott15">
+                <div class="row">
+                <div class="six columns bodd">
+                    <span class="mobile" editable-number="gig.mobile" buttons="no" blur="submit" e-minlength="10" e-maxlength="10">{@ gig.mobile || "Mobile" @}</h5>
+                </div>
+                <div class="six columns bodd">
+                    <span class="email" editable-email="gig.email" buttons="no" blur="submit">{@ gig.email || "Email" @}</h5>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="gig-controls">
+  <div class="padding-left-15 padding-right-15">
+      <a class="cb primary full-width arrow" ng-click="uploadGig()" ng-if="!gig.id">Upload</a>
+      <a class="cb primary full-width arrow" ng-click="uploadGig()" ng-if="gig.id">Update</a>
+  </div>
+  <div class="u-cf"></div>
+</div>
+</div>
+</div>

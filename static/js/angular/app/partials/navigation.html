@@ -1,0 +1,64 @@
+<nav class="navbar">
+    <div class="container">
+        <ul class="navbar-list">
+            <li class="navbar-item logo">
+                <a href="/" class="navbar-link"><img src="/static/images/logo.png" /></a>
+            </li>
+        </ul>
+        <ul class="navbar-list u-pull-right">
+            <li class="navbar-item">
+            <a href="/#/create" class="navbar-link"><span class="svg-icon icon-create"
+                    ng-class="{'active': primaryActiveIcon === 'create'}"></span></a>
+            </li>
+            <li class="navbar-item">
+            <a href="/#/me" class="navbar-link"><span class="svg-icon icon-profile"
+                      ng-class="{'active': primaryActiveIcon === 'profile'}"></span></a>
+            </li>
+            <li class="navbar-item">
+                <span class="label count" ng-if="currentUser.notification_count > 0">{@ currentUser.notification_count @}</span> 
+                <a href="/#/notifications" class="navbar-link"><span class="svg-icon icon-notifications"
+                        ng-class="{'active': primaryActiveIcon === 'notifications'}"></span></a>
+            </li>
+            <li class="navbar-item">
+                <a ng-click="toggleSearch()" class="navbar-link"><span class="svg-icon icon-search"></span></a>
+            </li>
+        </ul>
+    </div>
+    <input class="search" type="search" name="search" id="search" ng-model="query" search-input />
+    <span class="search-cancel cancel" ng-click="cancelSearch()" ng-show="isSearchActive"></span>
+
+    <div class="top-controls">
+    <!--<div class="tabs">
+        <ul class="tabs-list">
+            <li><a ng-class="{'active': currentTab === 'gigs'}" href="/">Gigzag</a></li>
+            <li><a href="#/me">Me</a></li>
+        </ul>
+    </div>-->
+    <div class="filters" ng-if="!hideFilters">
+        <div class="table maincontainer">
+            <span ng-if="secondaryTab!=='today'" ng-click="getFilteredGigs('today')" class="cell filter">Today</span>
+            <span ng-if="secondaryTab==='today'" ng-click="getFilteredGigs('today')" class="cell filter active">Today</span>
+            <span ng-if="secondaryTab!=='weekend'" ng-click="getFilteredGigs('weekend')" class="cell filter">Weekend</span>
+            <span ng-if="secondaryTab==='weekend'" ng-click="getFilteredGigs('weekend')" class="cell filter active">Weekend</span>
+            <span ng-if="secondaryTab!=='date'" ng-click="selectDate($event)" class="cell filter icon-calendar"></span>
+            <span ng-if="secondaryTab==='date'" ng-click="selectDate($event)" class="cell filter icon-calendar active"></span>
+            <a ng-if="secondaryTab !== 'settings'" href="/#/settings" class="cell filter icon-settings"></a>
+            <a ng-if="secondaryTab === 'settings'" href="/#/settings" class="cell filter icon-settings active"></a>
+        </div>
+    </div>
+    <div class="dpick" ng-if="showCalendar">
+    <datepicker date-format="ddMMyyyy" datepicker-toggle="false" datepicker-show="{@ showdp @}"><input ng-model="gigdate" type="text" /></datepicker>
+    </div>
+
+    <div class="filters upload-filters" ng-if="uploadScreen">
+        <div class="table maincontainer">
+            <span ng-click="stepOne()" class="cell filter"
+                ng-class="{'active': step === 1}">Upload Video</span>
+            <span ng-click="stepTwo()" class="cell filter"
+                ng-class="{'active': step === 2}">Details</span>
+            <span ng-click="stepThree()" class="cell filter"
+                ng-class="{'active': step === 3}">Guests</span>
+        </div>
+    </div>
+</div>
+</nav>

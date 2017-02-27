@@ -1,0 +1,30 @@
+            <div class="sharer" id="sharer_{@gig.id@}">
+                <div class="buttons container">
+                    <span class="heading uppercase">Share this gig with your friends via</span>
+                    <div class="row">
+                    <div class="four columns">
+                    <a socialshare socialshare-provider="whatsapp" socialshare-text="Checkout this amazing performance on gigzag.in '{@ gig.title @}' by '{@ gig.band_name @}' on '{@ gig.human_time @}'"
+                                                                   socialshare-url="http://gigzag.in/gig/{@ gig.id @}/#/gigs/{@ gig.id @}" class="center-content color-black radius3 bg-white b"
+                        socialshare-media="{@ gig.cover @}"
+                        ng-if="ismobile">
+                        <i class="fa fa-whatsapp"></i> Whatsapp
+                    </a>
+                    </div>
+                    <div class="four columns">
+                    <a socialshare socialshare-provider="facebook" socialshare-title="GigZag.in" socialshare-description="Check out this amazing gig '{@ gig.title @}' at Gigzag."
+                                                                                                 socialshare-url="http://gigzag.in/gig/{@ gig.id @}/#/gigs/{@ gig.id @}" class="center-content color-black radius3 bg-white b"
+                        socialshare-media="{@ gig.cover @}" socialshare-type="share">
+                        <i class="fa fa-facebook"></i> Facebook
+                    </a>
+                    </div>
+                    <div class="four columns">
+                    <a socialshare socialshare-provider="twitter" socialshare-text="Checkout this amazing performance on gigzag.in '{@ gig.title @}' by '{@ gig.band_name @}' on '{@ gig.human_time @}'"
+                        socialshare-url="http://gigzag.in/gig/{@ gig.id @}/#/gigs/{@ gig.id @}" class="center-content color-black radius3 bg-white b"
+                        socialshare-media="{@ gig.cover @}">
+                        <i class="fa fa-twitter"></i> Twitter
+                    </a>
+                    </div>
+                    </div>
+                    <a class="cb secondary tiny" ng-click="toggleSharer(gig)">Cancel</a>
+                </div>
+            </div>

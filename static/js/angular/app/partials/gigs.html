@@ -1,0 +1,186 @@
+<!-- navigation -->
+<div class="navbar-spacer"></div>
+<ng-include src="'/static/js/angular/app/partials/navigation.html'"></ng-include>
+
+
+<!-- main content -->
+<div class="ngd message" ng-if="gigs.length <= 0 && urlparams.df === 'today'">
+    <div class="container">
+        <p>No gigs in your city today. Please tap the GigZag button.</p>
+    </div>
+</div>
+<div class="ngd message" ng-if="gigs.length <= 0 && urlparams.df === 'weekend'">
+    <div class="container">
+        <p>No gigs this weekend in your city! Please tap the GigZag button.</p>
+    </div>
+</div>
+<div class="ngd message" ng-if="gigs.length <= 0 && urlparams.df === undefined">
+    <div class="container">
+        <p>No gigs found! Please tap the GigZag button.</p>
+    </div>
+</div>
+
+<div class="gigscreen">
+<div class="maincontainer">
+<div id="main-slider" class="slider-pro" ng-if="gigs.length > 0">
+    <div class="sp-slides" ng-class="{fakemask: gigs.length === 1}">
+        <div class="sp-slide" ng-repeat="gig in gigs">
+            <gig-item>
+                <div class="primary-bg">
+                    <div class="video-player">
+                        <video id="gig_{@ gig.id @}"
+                            class="v-js vjs-default-skin vjs-big-play-centered"
+                            preload="none" height="270"
+                            poster="{@ gig.cover @}" data-setup="{}" ng-if="gig.youtube_link < 1">
+                            <source src="{@ gig.video @}" type="video/mp4">
+                            <p>To view this video please enable javascript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+                        </video>
+                        <iframe class="sp-video" height="200px" width="100%" src="{@ trustSrc(gig.youtube_link) @}" frameborder="0" allowfullscreen ng-if="gig.youtube_link"></iframe>
+                        <span class="iframe-hack" ng-if="gig.youtube_link"></span>
+                        <span class="iframe-play" ng-if="gig.youtube_link" ng-click="playYoutubeVideo($event);"></span>
+                        <span class="play-icon" id="play_gig_{@ gig.id @}" data-gigid="{@ gig.id @}" ng-if="gig.youtube_link < 1"></span>
+                        <div class="vm-likes">
+                            <span class="heart-icon" ng-if="gig.has_liked"></span>
+                            <span class="heart-icon empty" ng-if="gig.has_liked === false" ng-click="likeGig(gig)"></span>
+                            <span class="vm-count likes">{@ gig.like_count @}</span>
+                            <span class="comment-icon" ng-click="commentClick()"></span>
+                            <span class="vm-count comments">{@ gig.comment_count @}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="primary-bg">
+                    <div class="video-info">
+                        <div class="video-info-header">
+                            <h2 class="title" ng-click="getTaggedGigs($event)">{@ gig.title | limitTo:32 @}</h2>
+                            <span class="label" ng-repeat="tag in gig.tags" ng-click="getTaggedGigs($event)">{@ tag.title @}</span>
+                            <h5 ng-click="getTaggedGigs($event)">{@ gig.band_name @}</h5>
+                        </div>
+                        <div class="video-info-content">
+                            <div class="video-info-footer">
+                                <span>Total no. of spots at the Gig: {@ gig.no_of_pax @}</span>
+                            </div>
+                            <div class="row">
+                                <span class="u-pull-left">{@ gig.date @} {@ gig.timings @}</span>
+                                <span class="u-pull-right friend-avatar" ng-click="showContact(gig)">
+                                    <span class="u-pull-left hbt">Hosted By: </span>
+                                    <span class="u-pull-right"><img src="{@ gig.created_by.profile_image @}" /></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="u-cf"></div>
+                        <div class="video-info-footer" ng-if="!fullAddress">
+                            <span class="icon icon-location"></span>
+                            <span>{@ gig.gig_address | limitTo:40 @}</span>
+                            <span ng-if="gig.gig_address.length > 40">...</span>
+                        </div>
+                        <div class="video-info-footer" ng-if="fullAddress">
+                            <span class="icon icon-location"></span>
+                            <span>{@ gig.gig_address @}</span>
+                        </div>
+                        <div class="u-cf"></div>
+                        <div class="xcomm contracted" ng-click="toggleComments($event)">
+                        </div>
+                    </div>
+                </div>
+                <div class="secondary-bg">
+                    <div class="video-info">
+                        <div class="comments sp-selectable contracted" id="comments_for_{@ gig.id @}">
+                         <div class="comments-meta row">
+                              <span class="u-pull-left">
+                                  <span class="icon icon-bubble"></span>
+                              </span>
+                              <span class="u-pull-right counts">
+                                  <span class="like-count">{@ gig.like_count @} Likes</span>
+                                  <span class="comment-count">{@ gig.comment_count @} Comments</span>
+                              </span>
+                          </div>
+                          <div class="u-cf"></div>
+                          <div class="comment-input row" ng-if="currentUser">
+                              <div class="two columns">
+                                  <span class="friend-avatar">
+                                      <img src="{@ currentUser.profile_image @}" />
+                                  </span>
+                              </div>
+                              <div class="ten columns">
+                                  <textarea id="postcomment_{@ gig.id @}" rows="2"></textarea>
+                              </div>
+                              <div class="twelve columns comment-controls">
+                                  <a ng-click="cancelComment()">Cancel</a>
+                                  <a ng-click="postComment()">Post</a>
+                              </div>
+                          </div>
+                          <div class="comment-input row text-center" ng-if="!currentUser">
+                              <a class="" ng-click="loginRedirect()">Login to comment</a>
+                          </div>
+                          <div class="user-comments">
+                              <div class="user-comment row" ng-repeat="comment in gigComments">
+                                  <div class="two columns">
+                                      <span class="friend-avatar">
+                                          <img src="{@ comment.user.profile_image @}" />
+                                          <span class="text-center username">{@ comment.user.first_name @}</span>
+                                      </span>
+                                  </div>
+                                  <div class="ten columns comment-body">
+                                      <p>{@ comment.comment @}</p>
+                                      <span class="comment-time">{@ comment.posted_at @}</span>
+                                  </div>
+                              </div>
+                              <div class="u-cf"></div>
+                              <div class="lmc">
+                                  <a class="lmc-button" ng-if="nextComments" ng-click="loadMoreComments()">Load More Comments</a>
+                              </div>
+                          </div>
+
+                      </div>
+                      <div class="friends" ng-if="gig.rsvp.length > 0">
+                          <span class="u-pull-left fgt">Friends Going</span>
+                          <span class="u-pull-right friends-images">
+                              <span class="friend-avatar" ng-repeat="person in gig.rsvp | limitTo:3">
+                                  <img src="{@ person.profile_image @}" />
+                              </span>
+                              <span class="more-friends" ng-if="gig.rsvp.length > 3">
+                                  <span class="number">{@ gig.rsvp.length -3 @}</span>
+                                  <span class="icon icon-plus"></span>
+                              </span>
+                          </span>
+                          <div class="u-cf"></div>
+                      </div>
+                      <div class="friends" ng-if="gig.rsvp.length < 1">
+                          <span class="fgt" ng-click="toggleSharer()">You can invite your friends to go to this gig</span>
+                      </div>
+                  </div>
+                </div>
+            </gig-item>
+            <ng-include src="'/static/js/angular/app/partials/sharer.html'"></ng-include>
+            <ng-include src="'/static/js/angular/app/partials/contact.html'"></ng-include>
+            <div class="bottom-spacer"></div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="gig-controls" ng-if="gigs.length > 0">
+  <div class="u-pull-left padding-left-15">
+      <a class="cb secondary arrow" ng-click="toggleSharer()">Tell Friends</a>
+  </div>
+  <div class="u-pull-right padding-right-15">
+      <a class="cb primary arrow" ng-click="confirmGoing()" ng-if="going() === false">Go To Gig</a>
+      <a class="cb primary" ng-if="going()">You're Going</a>
+  </div>
+  <div class="u-cf"></div>
+</div>
+</div>
+
+
+<div class="confirm-go" ng-if="showConfirmGo">
+    <div class="uppercase">
+      <p>{@ getConfirmText() @}
+      <div class="u-pull-left padding-left-15">
+          <a class="cb secondary arrow" ng-click="cancelConfirmation()">Cancel</a>
+      </div>
+      <div class="u-pull-right padding-right-15">
+          <a class="cb primary arrow" ng-click="goToGig($event)" ng-if="going() === false">Confirm</a>
+      </div>
+      <div class="u-cf"></div>
+      </p>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+<!-- navigation -->
+<div class="navbar-spacer"></div>
+<ng-include src="'/static/js/angular/app/partials/navigation.html'"></ng-include>
+
+
+<!-- main content -->
+<div class="ngd message" ng-if="gigs.length <= 0">
+    <div class="container">
+        <p>Sorry, we could not find any gigs.</p>
+    </div>
+</div>
+
+<div class="container maincontainer">
+    <div class="notifications section">
+        <div class="notification" ng-repeat="notification in notifications" ng-class="{'unread': notification.unread}" ng-click="gigDetails(notification.action.target_id);">
+            <div class="row">
+                <div class="two columns friend-avatar large">
+                    <img src="{@ notification.action.actor.profile_image @}" />
+                </div>
+                <div class="ten columns">
+                    <h4 class="heading">
+                        {@ notification.action.target_name @}
+                    </h4>
+                    <div class="date info">
+                        <span class="icon-calendar"></span>
+                        {@ notification.action.target_date @}
+                    </div>
+                    <div class="message info">
+                        <span class="highlight">
+                            {@ notification.action.actor.first_name @} {@ notification.action.actor.last_name @}
+                        </span>
+                        <span> {@ notification.action.verb @} </span>
+                        <span class="highlight">{@ notification.action.target_name @}</span><span>.</span>
+                    </div>
+                    <span class="timesince info">
+                        {@ notification.timesince @}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="lmc">
+        <a class="lmc-button ng-scope" ng-if="nextPage" ng-click="getMoreNotifications()">Load More Notifications</a>
+    </div>
+</div>

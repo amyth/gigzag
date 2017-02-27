@@ -1,0 +1,160 @@
+{% load static from staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en" ng-app="gigzagApp">
+
+    <head>
+        <!-- meta -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	    <meta name="google-site-verification" content="xUwla6xvtzlnSVP7kBGuUJtBbVV8l_5zoBvAlJR2odw" />
+        <link rel="icon" type="image/png" href="{% static 'images/fav_icon.png' %}?v=2" />
+        <title>Find the best live gigs and Host your own events on Gigzag | Music, Events and Promotions</title>
+
+
+        <meta property="fb:app_id" content="1738238653112187" />
+        {% if gig_detail %}
+        <meta property="og:url" content="http://gigzag.in{{request.path}}#/gigs/{{gig_detail.id}}" />
+        <meta property="og:title" content="Checkout this amazing performance on gigzag.in '{{ gig_detail.title }}' by '{{ gig_detail.band_name }}' on '{{ gig_detail.human_time}}' : Venue : {{ gig_detail.location.get_city_display }}" />
+        <meta property="twitter:title" content="Checkout this amazing performance on gigzag.in '{{ gig_detail.title }}' by '{{ gig_detail.band_name }}' on '{{ gig_detail.human_time}}'" />
+        <meta property="og:description" content="{{ gig_detail.description }}" />
+            {% if gig_detail.cover %}
+            <meta property="og:image" content="http://gigzag.in{{ gig_detail.cover.url }}" />
+	    <meta name="twitter:image" content="http://gigzag.in{{ gig_detail.cover.url }}" />
+	    <meta name="twitter:url" content="http://gigzag.in{{ gig_detail.cover.url }}" />
+	    {% elif gig_detail.youtube_link %}
+            <meta property="og:image" content="{{ gig_detail.v_youtube_image }}" />
+	    <meta name="twitter:image" content="{{ gig_detail.v_youtube_image }}" />
+	    <meta name="twitter:url" content="{{ gig_detail.v_youtube_image }}" />
+	    {% else %}
+            <meta property="og:image" content="http://gigzag.in{% static 'images/logo.png' %}" />
+            {% endif %}
+            {% if gig_detail.youtube_link %}
+            <meta property="og:video" content="{{ gig_detail.v_youtube_link }}" />
+            <meta name="twitter:video" content="{{ gig_detail.v_youtube_link }}" />
+            {% endif %}
+        {% else %}
+        <meta property="og:url" content="http://gigzag.in{{request.path}}#/gigs/{{gig_detail.id}}" />
+        <meta property="og:title" content="Find the best live gigs and Host your own events on Gigzag | Music, Events and Promotions" />
+        <meta property="twitter:title" content="Find the best live gigs and Host your own events on Gigzag | Music, Events and Promotions" />
+        <meta property="og:description" content="GigZag is a collection of the best and most authentic artists from India, sharing space to connect with a common audience. You! 
+        We built it so great artists, acts and parties can find the right people and you can start hosting your parties with ease." />
+        {% endif %}
+        <meta property="og:type" content="video" />
+	    <meta name="twitter:card" content="photo" />
+	    <meta name="twitter:site" content="@gigzag" />
+        <meta name="keywords" content="Live, Events, Indie Gigs, House Concerts, Home Concerts in Delhi, Mumbai, Pune, Goa, Bangalore, Hyderabad, Chennai, Chandigarh and More, Live events in India, Music, Concerts, Standup, Weekend plans, Evening plans, live concert anywhere, NCR Music, House Concert Delhi, Event Planning, Event Promotion in India" />
+
+        <!-- css -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/skeleton.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/video.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/slider-pro.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/angular-datepicker.min.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/angular-ui-switch.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/xeditable.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/google-places.autocomplete.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/buttons.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/shake.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/angularjs-slider.min.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/angular.timepicker.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/ng-tags-input.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+        {% if not request.is_mobile or not request.is_phone %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/desktop.css' %}" />
+        {% endif %}
+
+        <!-- javascript -->
+        {% block js %}
+        <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/jquery.easings.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/underscore.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/jquery.sliderPro.js' %}"></script>
+        <!--<script type="text/javascript" src="{% static 'js/video.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/video.prefixfree.min.js' %}"></script>-->
+        <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/angular/angular.js' %}"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnGxS0_6ajH1G313zVcp7SUVIktl9CcZs&libraries=places"></script>
+        <script type="text/javascript" src="{% static 'js/google-places.autocomplete.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/angular/angular-datepicker.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/angular/angular.timepicker.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/angular/ng-tags-input.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/angular/angular-ui-switch.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/angular/angular-socialshare.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/angular/angularjs-slider.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/angular/xeditable.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/angular/angular.route.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/angular/angular.resource.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/angular/app/app.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/angular/app/services.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/angular/app/controllers.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/locationpicker.jquery.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/angular/angularLocationPicker.jquery.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/angular/app/directives.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/mobile.js' %}"></script>
+        {% endblock js %}
+    </head>
+
+    <body class="has-docked-nav {% if not request.is_mobile or not request.is_phone %}desktop_body{% endif %}">
+        {% if not request.is_mobile or not request.is_phone %}
+        <div class="desktop_nav">
+            <div class="container">
+                <div class="row">
+                    <div class="four columns social">
+                        <ul class="navbar-list">
+                            <li class="navbar-item">
+                                <a href="https://www.facebook.com/gigzagme/" class="navbar-link"><img src="{% static 'images/desk_face.png' %}" /></a>
+                            </li>
+                            <li class="navbar-item">
+                                <a href="https://twitter.com/GigZagMe" class="navbar-link"><img src="{% static 'images/desk_twitter.png' %}" /></a>
+                            </li>
+                            <li class="navbar-item">
+                                <a href="https://plus.google.com/108100675008412216709?hl=en" class="navbar-link"><img src="{% static 'images/desk_gplus.png' %}" /></a>
+                            </li>
+                            <li class="navbar-item">
+                                <a href="https://www.instagram.com/gigzagme/" class="navbar-link"><img src="{% static 'images/desk_insta.png' %}" /></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="four columns logo">
+                        <ul class="navbar-list">
+                            <li class="navbar-item">
+                                <a href="/" class="navbar-link"><img src="{% static 'images/logo_w.png' %}" /></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="four columns links">
+                        <ul class="navbar-list">
+                            <li class="navbar-item">
+                                <a href="https://gigzag.wordpress.com/blog/" class="navbar-link">Blog</a>
+                            </li>
+                            <li class="navbar-item">
+                                <a href="https://gigzag.wordpress.com/contact/" class="navbar-link">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right_info">
+            <p>We built GigZag for artists, acts<br/>and parties to find the right crowd.</p>
+            <p>Discover great gigs and start host-<br/>ing your own!</p>
+            <p><strong>Team GigZag</strong></p>
+            <p class="smaller"><i>Go to gigzag.in on your mobile<br/>for a fuller experience.</i></p>
+        </div>
+        <div class="desktop_container">
+        {% endif %}
+        <div class="container" ng-view></div>
+        <script type="text/javascript">
+            {% if request.user.is_authenticated %}
+                window._RX = {{ request.user.id }}
+            {% else %}
+                window._RX = -1
+            {% endif %}
+        </script>
+        <div class="loader" data-loading></div>
+        {% if not request.is_mobile or not request.is_phone %}
+        </div>
+        {% endif %}
+    </body>
+</html>

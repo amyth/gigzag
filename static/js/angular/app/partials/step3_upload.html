@@ -1,0 +1,52 @@
+<div class="uploadscreen static">
+<div class="maincontainer">
+    <div class="section">
+        <div class="heading">
+            <div>
+                <h4>Post To</h4>
+            </div>
+            <div class="tags">
+                <span class="tag" ng-repeat="(lname, lvalue) in plevels_share">
+                    <span ng-click="updatePostedBy(lvalue)">
+                        <span>{@ lname @}</span>
+                        <span ng-if="post_to !== lvalue" class="mini-add">+</span>
+                        <span ng-if="post_to === lvalue" class="mini-remove">x</span>
+                    </span>
+                </span>
+            </div>
+        </div>
+        <div class="glist">
+            <span class="butt uppercase">Guest List</span>
+        </div>
+    </div>
+
+    <div class="section sharing">
+        <div class="heading">
+            <div><h4>Share</h4></div>
+        </div>
+        <div class="share input">
+            <input type="text" placeholder="Wirte your own message ..." ng-model="userShareText" />
+        </div>
+    </div>
+
+    <div class="section light sharers3">
+        <div class="row">
+            <div class="four columns" socialshare socialshare-provider="facebook" socialshare-text="{@ getShareText() @}" socialshare-url="http://gigzag.in/gig/{@ gig.id @}/#/gigs/{@ gig.id @}"
+                socialshare-media="{@ getShareMedia() @}"><i class="fa fa-facebook"></i> Facebook</div>
+            <div class="four columns" socialshare socialshare-provider="twitter" socialshare-text="Checkout this amazing performance on gigzag.in '{@ gig.title @}' by '{@ gig.band_name @}' on '{@ gig.human_time @}'" socialshare-url="http://gigzag.in/gig/{@ gig.id @}/#/gigs/{@ gig.id @}" socialshare-media="{@ getShareMedia() @}"><i class="fa fa-twitter"></i> Twitter</div>
+            <div class="four columns" socialshare socialshare-provider="google" socialshare-text="{@ getShareText() @}" socialshare-url="{@ getShareUrl() @}"                                      socialshare-media="{@ getShareMedia() @}"><i class="fa fa-google-plus"></i> Google+</div>
+        </div>
+        <div class="row">
+            <div class="six columns" socialshare socialshare-provider="pinterest" socialshare-text="{@ getShareText() @}" socialshare-url="{@ getShareUrl() @}"                                      socialshare-media="{@ getShareMedia() @}"><i class="fa fa-pinterest"></i> Pinterest</div>
+            <a class="whatsapp-button six columns" socialshare socialshare-provider="whatsapp" socialshare-text="Checkout this amazing performance on gigzag.in '{@ gig.title @}' by '{@ gig.band_name @}' on '{@ gig.human_time @}'" socialshare-url="http://gigzag.in/gig/{@ gig.id @}/#/gigs/{@ gig.id @}"                                      socialshare-media="{@ getShareMedia() @}"><i class="fa fa-whatsapp"></i> Whatsapp</a>
+        </div>
+    </div>
+
+<div class="gig-controls">
+  <div class="padding-left-15 padding-right-15">
+      <a class="cb primary full-width arrow" href="/">Ok</a>
+  </div>
+  <div class="u-cf"></div>
+</div>
+</div>
+</div>

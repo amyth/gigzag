@@ -1,0 +1,16 @@
+<div class="sharer contact" id="contact_{@gig.id@}">
+    <div class="buttons container">
+        <span class="heading uppercase">Contact the gig admin</span>
+        <div class="row">
+            <div class="three columns">
+                <span class="friend-avatar largest"><img src="{@ gig.created_by.profile_image @}" /></span>
+                <span class="bname">{@ gig.created_by.first_name @}</span>
+            </div>
+            <div class="nine columns">
+                <div class="phone"><b>Phone: </b>{@ gig.phone @}</div>
+                <div class="email"><b>Email: </b>{@ gig.email @}</div>
+            </div>
+        </div>
+        <a class="cb secondary tiny" ng-click="showContact(gig)">Cancel</a>
+    </div>
+</div>

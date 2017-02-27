@@ -1,0 +1,210 @@
+@media (min-width: 320px) {
+.has-docked-nav .navbar {
+    position: relative;
+    top: 0;
+    left: 0;
+}
+}
+
+input.search {
+    z-index:100;
+}
+.desktop_body {
+	background: url(../images/bg_desktop.png) no-repeat;
+	background-size: inherit;
+}
+
+.desktop_container {
+	max-width: 350px;
+	margin: 0 auto;
+	background: url(../images/mobile.png) no-repeat;
+	background-size: 370px 700px;
+	padding: 0 10px;
+	margin-top: 90px;
+	min-height: 525px;
+}
+
+.desktop_container .notifications,
+.desktop_container .profilescreen,
+.desktop_container .uploadscreen.static,
+.desktop_container .settings {
+    margin-top: 45px;
+}
+.desktop_container #main-slider {
+    margin-top: 16px;
+}
+
+.desktop_container .maincontainer {
+    max-height: 525px;
+    overflow: scroll;
+    width: 100%;
+}
+
+.desktop_container .profilescreen .cb.secondary.small {
+    display: block;
+    cursor: pointer;
+}
+
+.cb {
+    cursor: pointer;
+}
+.ngd.message {
+    position: absolute;
+    top: 250px;
+}
+
+.desktop_container .navbar {
+	height: 45px;
+}
+
+.desktop_container .top-controls {
+	position: relative;
+	top: -19px;
+	border-top: none;
+}
+
+.desktop_container .gig-controls {
+	position: relative;
+	width: 100%;
+	background: white;
+    bottom: 17px;
+	margin-top:0;
+}
+
+.desktop_container .fakemask {
+	height: 515px;
+}
+
+.desktop_container .maincontainer > .gig-controls {
+}
+
+.desktop_nav {
+	background: black;
+	margin:0 auto;
+	color: yellow;
+	text-align: center;
+}
+
+.desktop_nav > .container {
+    position: relative;
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.desktop_nav .navbar-item img {
+	width: 100% !important;
+}
+.desktop_nav .logo .navbar-item img {
+    width: 70px !important;
+}
+
+.desktop_nav .social .navbar-item {
+	margin-right: 6px;
+}
+.desktop_nav .logo .navbar-item {
+	float: none;
+}
+.desktop_nav .links .navbar-item {
+	margin-left: 35px;
+	margin-top: -8px;
+}
+
+.desktop_nav .columns {
+    margin-left: 0;
+	float:left;
+	text-align: center;
+}
+
+.desktop_nav a,
+.desktop_nav a:active,
+.desktop_nav a:hover,
+.desktop_nav a:visited {
+	color: #FEBF00;
+	text-transform: none;
+	font-weight: normal;
+}
+
+.right_info {
+    position: absolute;
+    right: 120px;
+    top: 350px;
+    color: white;
+    display:none;
+}
+.right_info p {
+    margin-bottom: 12px;
+    font-size: 13px;
+}
+
+.desktop_nav .links.columns,
+.desktop_nav .logo.columns {
+    padding-left: 85px !important;
+}
+.desktop_nav .logo.columns {
+    padding: 0;
+}
+
+.desktop_container .hunnit.container {
+    padding-top: 85px;
+}
+.desktop_nav li.navbar-item {
+    float: none;
+    display: inline-block;
+}
+
+::-webkit-scrollbar {
+    display:none;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+body {
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+}
+
+.logo.columns,
+.social.columns,
+.links.columns {
+    display:none;
+}
+
+.has-docked-nav .navbar > .container {
+    z-index: 100;
+}
+.navbar .navbar-list.u-pull-right > .navbar-item .svg-icon {
+    display: inline-block;
+    background-position:0px 10px !important;
+}
+.navbar .navbar-list.u-pull-right > .navbar-item {
+    height:45px;
+}
+.top-controls ._720kb-datepicker-calendar {
+    top:23px;
+    width:100.01%;
+    margin: 0 auto;
+}
+.notification > .row {
+    padding-top:10px;
+}
+.sp-mask {
+    min-height: 470px;
+}
+@media (min-width: 1020px) {
+.right_info {
+    display:block;
+}
+}
+@media (min-width: 790px) {
+.logo.columns,
+.social.columns,
+.links.columns {
+    display:block;
+}
+}

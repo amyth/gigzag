@@ -1,0 +1,33 @@
+{% load static from staticfiles %}
+
+<div class="navbar-spacer"></div>
+<nav class="navbar">
+    <div class="container">
+        <ul class="navbar-list">
+            <li class="navbar-item">
+                <a href="#" class="navbar-link"><span class="svg-icon icon-menu"></span></a>
+            </li>
+        </ul>
+        <ul class="navbar-list u-pull-right">
+            <li class="navbar-item">
+                <a href="#" class="navbar-link"><span class="svg-icon icon-search"></span></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="top-controls">
+    <div class="tabs">
+        <ul class="tabs-list">
+            <li><a class="active" href="/">Gigzag</a></li>
+            <li><a href="#/me">Me</a></li>
+        </ul>
+    </div>
+    <div class="filters">
+        <div class="table">
+            <span ng-click="getFilteredGigs('today')" class="cell filter active">Today</span>
+            <span ng-click="getFilteredGigs('weekend')" class="cell filter active">Weekend</span>
+            <span ng-click="tF()" class="cell filter active">All</span>
+            <span href="getFilteredGigs('date')" class="cell filter active">Select date</span>
+        </div>
+    </div>
+</div>

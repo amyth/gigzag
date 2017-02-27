@@ -1,0 +1,22 @@
+<!-- navigation -->
+<div class="navbar-spacer"></div>
+<ng-include src="'/static/js/angular/app/partials/navigation.html'"></ng-include>
+
+
+<!-- main content -->
+<div class="container" ng-if="step === 1">
+    <ng-include src="'/static/js/angular/app/partials/step1_upload.html'"></ng-include>
+</div>
+<div class="container" ng-if="step === 2">
+    <ng-include src="'/static/js/angular/app/partials/step2_upload.html'"></ng-include>
+</div>
+<div class="container" ng-if="step === 3">
+    <ng-include src="'/static/js/angular/app/partials/step3_upload.html'"></ng-include>
+</div>
+<input id="uploader" type="file" accept="video/mp4,video/x-m4v,video/*" capture="camera" ng-model="video" />
+<input type="file" id="cover" name="cover" ng-model="cover" accept="image/*" class="cover" />
+<div class="hidden-map-inputs">
+    <input type="text" id="latitude" name="latitude" />
+    <input type="text" id="longitude" name="longitude" />
+    <input type="text" id="address" name="address" />
+</div>
